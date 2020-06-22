@@ -9,4 +9,6 @@ struct ListElem {
 typedef struct ListElem* List;
 
 int list_push(List* list, void* elem);
+
+void list_free(List* list);
 #endif

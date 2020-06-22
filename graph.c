@@ -63,10 +63,15 @@ void graph_print(struct Graph* graph) {
     }
 }
 
+void node_free(struct Node* node) {
+    list_free(&node->neighbors);
+}
+
 void graph_free(struct Graph* graph) {
     int i;
 
     for (i = 0; i < graph->nbNodes; i++) {
+        node_free(graph->nodes[i]);
         free(graph->nodes[i]);
     }
 }

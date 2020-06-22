@@ -16,4 +16,18 @@ int list_push(List* list, void* elem) {
 
     return 1;
 }
+/*  --free--    --free--    --free--    --free--  */
+/* [1,next] -> [2,next] -> [3,next] -> [4,NULL] */
+/* [1,NULL] */
 
+void list_free(List* list) {
+    struct ListElem* cur;
+
+    cur = *list;
+    while (cur) {
+        struct ListElem* tmp = cur->next;
+        free(cur);
+        cur = tmp;
+    }
+    *list = NULL; // when the user frees the whole list, the list becomes NULL
+}
