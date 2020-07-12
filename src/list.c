@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 #include "list.h"
 
@@ -30,4 +31,28 @@ void list_free(List* list) {
         cur = tmp;
     }
     *list = NULL; // when the user frees the whole list, the list becomes NULL
+}
+
+/* randomly select an element from a linked list
+ * Reservoir sampling
+ */
+void* list_select_elem(List* list) {
+    struct ListElem* tmp;
+    int n;
+    void* res;
+
+    tmp = *list;
+    if (!tmp) {
+        return NULL;
+    }
+    res = tmp->elem; //set default to beginning of the list
+
+    srand(time(NULL));
+    for (n = 2; tmp != NULL; n++) {
+        if (rand() % n == 0) {
+            res = tmp->elem;
+        }
+        tmp = tmp->next;
+    }
+    return res;
 }

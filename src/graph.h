@@ -24,4 +24,5 @@ void graph_connect(struct Graph* graph, int node1, int node2);
 void graph_print(struct Graph* graph);
 
 void graph_free(struct Graph* graph);
+
 #endif
